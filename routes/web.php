@@ -31,20 +31,35 @@ Route::get('/', [PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show']);
 
 Route::get('categories/{category:name}', function (Category $category) {
-    $url=$_SERVER["PHP_SELF"];
-    $kategoria=explode("/", $url);
-    $kategoria = end($kategoria);
-    $posts = Category::where('name', 'like', $kategoria)->paginate(3);
-    return view('postscategory', [
-        'posts' => $category->posts
+
+     $kategoria = last(request()->segments());
+     $id = (DB::table('categories')
+     ->select('id')
+         ->where('name', '=', $kategoria)
+     ->get());
+    $id = json_decode($id, true);
+    $id = $id[0]['id'];
 
 
+    return view('posts', [
+    'posts' => Post::where('category_id', '=', $id)->paginate(3)
     ]);
 
 });
 Route::get('authors/{author:username}', function (User $author) {
-    return view('postscategory', [
-        'posts' => $author->posts
+    $autor = last(request()->segments());
+    $id = (DB::table('users')
+        ->select('id')
+        ->where('username', '=', $autor)
+        ->get());
+    $id = json_decode($id, true);
+    $id = $id[0]['id'];
+
+
+    return view('posts', [
+//        'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(1),
+////        'posts' => $author->posts
+        'posts' => Post::where('user_id', '=', $id)->paginate(3)
     ]);
 });
 // Only the guests can visit those pages:
@@ -86,3 +101,10 @@ Route::patch('admin/{editPost}/edit', [AdminPostController::class, 'update'])->m
 
 Route::delete('admin/{editPost}', [AdminPostController::class, 'delete'])->middleware('admin');
 
+
+
+//captcha
+
+Route::get('my-captcha', 'HomeContoller@myCaptcha') ->name('myCaptcha');
+Route::post('my-captcha', 'HomeContoller@myCaptchaPost') ->name('myCaptcha.post');
+Route::get('refresh-captcha', 'HomeContoller@refreshCaptcha') ->name('refresh_captcha');

@@ -64,9 +64,6 @@ class PostController extends Controller
             ]);
     }
 
-    public function findSearch() {
-
-    }
 
 
 

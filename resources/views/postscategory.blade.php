@@ -28,6 +28,8 @@
 
     <?php endforeach;?>
 
+    {{$posts->links()}}
+
 
 
 @endsection
