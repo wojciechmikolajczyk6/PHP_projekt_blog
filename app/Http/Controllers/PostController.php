@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Database\Query\BuilderClass;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 
@@ -41,12 +42,16 @@ class PostController extends Controller
        $posts = Post::latest();
 
 
-        if (request('search')) {
-            $posts->where('title', 'like', '%' . request('search') . '%')->get();
-            
-        }
+//        if (request('search')) {
+//            $posts->where('title', 'like', '%' . request('search') . '%')->get();
+//
+//        }
+
             return view('posts', [
-           'posts' => $posts->paginate(3)
+//                'posts' => DB::table('posts')->orderBy('id')->cursorPaginate(3),
+                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(3),
+                'categories' => Category::all(),
+
             ]);
         }
 
