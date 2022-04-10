@@ -80,7 +80,11 @@
                 <h4>Kategorie</h4>
 
                 <ol class="list-unstyled">
-                    @yield('category')
+{{--                    @yield('category')--}}
+                    <?php $categories = \App\Models\Category::all();?>
+                    @foreach ($categories as $category)
+                        <li><a href="/categories/{{$category->name}}">{{ $category->name }}</a></li>
+                    @endforeach
                 </ol>
             </div>
         </div><!-- /.blog-sidebar -->

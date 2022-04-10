@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Database\Query\BuilderClass;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +30,20 @@ Route::get('/', [PostController::class, 'index']);
 
 Route::get('posts/{post}', [PostController::class, 'show']);
 
-
 Route::get('categories/{category:name}', function (Category $category) {
-    return view('posts', [
+    $url=$_SERVER["PHP_SELF"];
+    $kategoria=explode("/", $url);
+    $kategoria = end($kategoria);
+    $posts = Category::where('name', 'like', $kategoria)->paginate(3);
+    return view('postscategory', [
         'posts' => $category->posts
+
+
     ]);
 
 });
 Route::get('authors/{author:username}', function (User $author) {
-    return view('posts', [
+    return view('postscategory', [
         'posts' => $author->posts
     ]);
 });

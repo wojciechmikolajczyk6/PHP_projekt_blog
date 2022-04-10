@@ -8,8 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    // protected $fillable = ['title', 'post_fragment', 'body', 'category_id'];
+    protected $guarded = [];
+//    protected $with = ['category', 'author'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query
+                ->where('title', 'like', '%' . request('search') . '%');
+        }
+        if ($filters['category'] ?? false) {
+            $query
+                ->whereExists('name', 'like', '%' . request('search') . '%');
+        }
+        $query->when($filters['author'] ?? false, fn($query, $author) =>
+        $query->whereHas('author', fn($query) =>
+        $query->where('username', $author)));
+    }
 
     protected function category()
     {
