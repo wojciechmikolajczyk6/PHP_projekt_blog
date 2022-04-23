@@ -11,6 +11,9 @@
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +21,8 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item active" href="/admin">Strona admina</a>
+            <a class="blog-nav-item active" href="/admin">Uzytkownicy</a>
+            <a class="blog-nav-item active" href="/admin/posts">Wszystkie posty</a>
             <a class="blog-nav-item" href="/admin/create">Dodaj post</a>
             <a class="blog-nav-item pull-right" href="/">Strona główna</a>
         </nav>

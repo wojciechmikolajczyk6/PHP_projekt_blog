@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
@@ -83,12 +84,24 @@ Route::get('admin/posts', [AdminPostController::class, 'create'])->middleware('a
 
 Route::post('admin/addPost', [PostController::class, 'store'])->middleware('admin');
 
-Route::get('admin/', function () {
+Route::get('admin', function () {
     return view('admin.index', [
-        'users' => User::all(),
+//        'users' => User::all(),
         'posts' => Post::all()
     ]);
     })->middleware('admin');
+
+//AJAX
+//Route::get('admin', [SearchController::class, 'index']);
+Route::get('/admin/action', [SearchController::class, 'action'])->name('index.action')->middleware('admin');;
+
+Route::get('/admin/posts', function () {
+    return view('admin.showPosts', [
+        'users' => User::all(),
+        'posts' => Post::all()
+    ]);
+})->middleware('admin');
+
 Route::get('admin/{editPost}', function (Post $editPost) {
 
 //    $post = Post::find($id);
@@ -108,3 +121,5 @@ Route::delete('admin/{editPost}', [AdminPostController::class, 'delete'])->middl
 Route::get('my-captcha', 'HomeContoller@myCaptcha') ->name('myCaptcha');
 Route::post('my-captcha', 'HomeContoller@myCaptchaPost') ->name('myCaptcha.post');
 Route::get('refresh-captcha', 'HomeContoller@refreshCaptcha') ->name('refresh_captcha');
+
+

@@ -2,54 +2,61 @@
 
 @section('content')
 
-    <table class="table table-striped">
+    <div class="container box">
+        <h3 align="center">Lista uzytkownikow</h3><br />
+        <div class="panel panel-default">
+            <div class="panel-heading">Wyszukaj uzytkownika</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <input type="text" name="search" id="search" class="form-control" placeholder="Search User Data" />
+                </div>
+                <div class="table-responsive">
+                    <h3 align="center">Liczba wyszukanych uzytkownikow : <span id="total_records"></span></h3>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>username</th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>id</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-        <tr>
-            <th>ID uzytkownika</th>
-            <th>Nazwa uzytkownika</th>
-            <th>Email</th>
-        </tr>
-        @foreach ($users as $user)
-        <tr>
-            <td>{{$user->id}}</td>
-            <td>{{$user->username}}</td>
-            <td>{{$user->email}}</td>
-        </tr>
-        @endforeach
-
-
-    </table>
-
-    <table class="table table-striped">
-        <tr>
-            <th>ID postu</th>
-            <th>Nazwa postu</th>
-            <th>Kategoria</th>
-            <th>Autor</th>
-            <th>Data</th>
-            <th>Edytuj</th>
-            <th>Usuń</th>
-        </tr>
-        <tr>
-            @foreach ($posts as $post)
-            <td>{{$post->id}}</td>
-            <td>{{$post->title}}</td>
-            <td>{{$post->category->name}}</td>
-            <td>{{$post->author->name}}</td>
-            <td>{{$post->created_at}}</td>
-                <td><a href="/admin/<?= $post->id;?>">Edytuj</a></td>
-{{--                <td><a href="/admin/<?= $post->id;?>">Usun</a></td>--}}
-                <td><form method="POST" action="/admin/<?=$post->id?>">
-                    @csrf
-                    @method('DELETE')
-                        <button class="text-danger">Usuń</button></form></td>
-                </form>
-
-        </tr>
-        @endforeach
-
-    </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
 
 
+    <script>
+        $(document).ready(function(){
 
+            fetch_user_data();
+
+            function fetch_user_data(query = '')
+            {
+                $.ajax({
+                    url:"{{ route('index.action') }}",
+                    method:'GET',
+                    data:{query:query},
+                    dataType:'json',
+                    success:function(data)
+                    {
+                        $('tbody').html(data.table_data);
+                        $('#total_records').text(data.total_data);
+                    }
+                })
+            }
+
+            $(document).on('keyup', '#search', function(){
+                var query = $(this).val();
+                fetch_user_data(query);
+            });
+        });
+    </script>
 @endsection
