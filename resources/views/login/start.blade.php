@@ -21,9 +21,19 @@
         <br>
         <input class="form-control" type="password" name="password" placeholder="Hasło:" required>
     </div>
+
+    <div class="col-md-8">
+        <label class="form-label">Captcha:</label>
+        {!!getCaptchaQuestion()!!}
+        <input class="form-control" name="_answer" type="number">
+        @error('_answer')
+        <p class="text-danger mt-1">{{$message}}</p>
+        @enderror
+    </div>
     <div class="col-md-8">
         <br>
-        <button type="submit" name="submit">Zaloguj się</button>
+        <input class="btn btn-primary" type="submit" name="submit" value="Zaloguj się">
+
     </div>
 
 

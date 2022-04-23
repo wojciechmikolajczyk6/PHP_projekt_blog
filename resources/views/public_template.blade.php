@@ -23,7 +23,7 @@
             <a class="blog-nav-item active" href="/">Strona główna</a>
             <a class="blog-nav-item" href="/">Wszystkie posty</a>
             <?php if (isset(auth()->user()->name) && (auth()->user()->name == 'admin')):?>
-                <a class='blog-nav-item' href='admin/'>Admin</a>
+                <a class='blog-nav-item' href='/admin'>Admin</a>
 
             <?php endif;?>
             @guest

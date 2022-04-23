@@ -43,11 +43,14 @@
 
 
             <br>
-            <button class="g-recaptcha"
-                data-sitekey="6LeVuzsfAAAAADFGzb1v-3thlXLcvkkHjz4W9_x4"
-                data-callback='onSubmit'
-                data-action='submit'>Załóż konto</button>
-            <button type="submit" name="submit">Załóż konto.</button>
+        <label class="form-label">Captcha:</label>
+        {!!getCaptchaQuestion()!!}
+        <input class="form-control" name="_answer" type="number">
+        @error('_answer')
+        <p class="text-danger mt-1">{{$message}}</p>
+        @enderror
+
+            <input class="btn btn-primary" type="submit" name="submit" value="Załóż konto.">
 
 
         </div>

@@ -14,9 +14,15 @@ class SessionsController extends Controller
 
     public function store()
     {
+        request() ->validate([
+            '_answer'   => 'required|simple_captcha'
+
+        ]);
+
         $user_data = request()->validate([
             'username' => 'required|max:255|min:3|exists:users,username',
-            'password' => 'required|max:255'
+            'password' => 'required|max:255',
+
         ]);
         //auth OK
 
@@ -26,6 +32,7 @@ class SessionsController extends Controller
         }
         //auth KO
         return back()->withErrors(['username' => 'Wprowadzono złe dane.']);
+        return back()->withErrors(['_answer' => 'Wprowadzono złe dane.']);
 
 
     }
