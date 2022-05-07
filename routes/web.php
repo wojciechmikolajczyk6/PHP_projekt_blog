@@ -13,6 +13,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Query\BuilderClass;
+use App\Http\Controllers\UserPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,3 +124,14 @@ Route::post('my-captcha', 'HomeContoller@myCaptchaPost') ->name('myCaptcha.post'
 Route::get('refresh-captcha', 'HomeContoller@refreshCaptcha') ->name('refresh_captcha');
 
 
+
+// ContactUsForm
+
+Route::get('/contact', [\App\Http\Controllers\ContactUsController::class, 'createForm']);
+Route::post('/contact', [\App\Http\Controllers\ContactUsController::class, 'ContactForm'])->name('contact.store');;
+
+
+
+//AddPostbyUser
+Route::get('/addPost', [PostController::class, 'create'])->middleware('auth');
+Route::post('/addPost', [UserPostController::class, 'store'])->middleware('auth');

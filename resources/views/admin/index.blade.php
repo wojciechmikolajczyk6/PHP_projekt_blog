@@ -15,10 +15,10 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>username</th>
-                            <th>name</th>
-                            <th>email</th>
                             <th>id</th>
+                            <th>Nazwa uzytkownika</th>
+                            <th>Imie i nazwisko</th>
+                            <th>email</th>
                         </tr>
                         </thead>
                         <tbody>

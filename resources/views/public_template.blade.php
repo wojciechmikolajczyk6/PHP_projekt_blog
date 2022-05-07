@@ -21,7 +21,7 @@
     <div class="container">
         <nav class="blog-nav">
             <a class="blog-nav-item active" href="/">Strona główna</a>
-            <a class="blog-nav-item" href="/">Wszystkie posty</a>
+
             <?php if (isset(auth()->user()->name) && (auth()->user()->name == 'admin')):?>
                 <a class='blog-nav-item' href='/admin'>Admin</a>
 
@@ -30,6 +30,7 @@
             <a class="blog-nav-item" href="/register">Rejestracja</a>
             <a class="blog-nav-item" href="/login">Logowanie</a>
             @else
+                <a class="blog-nav-item" href="/addPost">Dodaj post</a>
                 <div class="mt-8 md:mt-0 fixed right-10 flex items-center">
                 <span class="">{{ auth()->user()->name }}</span>
                 <form method="POST" action="/logout">
@@ -102,6 +103,7 @@
 
 <div class="blog-footer">
   <p>Blog o Japonii i języku Japońskim</p>
+   <a href="/contact"><p>Kontakt</p></a>
   <p>
     <a href="#">Back to top</a>
   </p>

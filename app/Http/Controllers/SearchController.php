@@ -21,15 +21,16 @@ class SearchController extends Controller
             $query = $request->get('query');
             if ($query != '') {
                 $data = DB::table('users')
+                    ->orderBy('id', 'asc')
                     ->where('username', 'like', '%' . $query . '%')
                     ->orWhere('name', 'like', '%' . $query . '%')
                     ->orWhere('email', 'like', '%' . $query . '%')
-                    ->orderBy('id', 'desc')
+
                     ->get();
 
             } else {
                 $data = DB::table('users')
-                    ->orderBy('id', 'desc')
+                    ->orderBy('id', 'asc')
                     ->get();
             }
             $total_row = $data->count();
@@ -39,10 +40,11 @@ class SearchController extends Controller
                 {
                     $output .= '
         <tr>
+        <td>'.$row->id.'</td>
          <td>'.$row->username.'</td>
          <td>'.$row->name.'</td>
          <td>'.$row->email.'</td>
-         <td>'.$row->id.'</td>
+
         </tr>
         ';
                 }

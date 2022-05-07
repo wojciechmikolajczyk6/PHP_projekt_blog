@@ -17,7 +17,7 @@ class PostController extends Controller
     public function create()
     {
 
-        return view('admin.create');
+        return view('addPost');
     }
     public function store()
     {
@@ -42,7 +42,7 @@ class PostController extends Controller
     public function index()
     {
 
-       $posts = Post::latest();
+        $posts = Post::latest();
 
 
 //        if (request('search')) {
@@ -50,21 +50,21 @@ class PostController extends Controller
 //
 //        }
 
-            return view('posts', [
+        return view('posts', [
 //                'posts' => DB::table('posts')->orderBy('id')->cursorPaginate(3),
-                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(3),
-                'categories' => Category::all(),
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(3),
+            'categories' => Category::all(),
 
-            ]);
-        }
+        ]);
+    }
 
 
     public function show(Post $post)
     {
 
-            return view('post', [
-                'post' => $post
-            ]);
+        return view('post', [
+            'post' => $post
+        ]);
     }
 
 
