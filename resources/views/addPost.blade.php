@@ -1,3 +1,5 @@
+
+
 @extends('public_template')
 
 @section('content')
@@ -11,14 +13,14 @@
         <div class="form-group">
             <label class="form-label">Krotki opis zawartosci posta</label>
             <br>
-            <textarea name="post_fragment" class="form-control" placeholder="Enter body of the post:" id="" cols="50" rows="10"></textarea>
+            <textarea name="post_fragment" class="form-control" placeholder="Enter body of the post:" id="text_body" cols="50" rows="10"></textarea>
         </div>
 
 
         <div class="form-group">
             <label class="form-label">Tresc posta</label>
             <br>
-            <textarea name="body" class="form-control" placeholder="Enter body of the post:" id="" cols="50" rows="10"></textarea>
+            <textarea name="body" class="form-control" placeholder="Enter body of the post:" id="text_body" cols="50" rows="10"></textarea>
         </div>
 
         <br>
@@ -35,10 +37,18 @@
 
         </select>
 
+
+
         <button name="submit" type="submit" class="btn btn-primary">Dodaj</button>
         <a href="index.php" class="btn btn-danger">Anuluj</a>
     </form>
     <br>
 
+
+
+
+
+
 @endsection
+
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 
-class PostController extends Controller
+class UserPostController extends Controller
 {
 
 

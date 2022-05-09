@@ -32,7 +32,7 @@
             @else
                 <a class="blog-nav-item" href="/addPost">Dodaj post</a>
                 <div class="mt-8 md:mt-0 fixed right-10 flex items-center">
-                <span class="">{{ auth()->user()->name }}</span>
+                <a href="/userpage/{{ auth()->user()->name }}"><span class="">{{ auth()->user()->name }}</span></a>
                 <form method="POST" action="/logout">
                     @csrf
                     <button class="text-xs text-green-600 ml-6" type="submit">Wyloguj się</button>
@@ -136,6 +136,27 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="https://cdn.tiny.cloud/1/ldfdbjzphvljdbcymthcuqzl84w0l6iq1dcuxo5rlpvv0b0g/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    tinymce.init({
+        selector: 'textarea#post_body, textarea#text_body',
+        plugins: [
+            "advlist autolink lists link image charmap preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media save table contextmenu directionality",
+            "paste textcolor colorpicker textpattern"
+        ],
+        toolbar: "insertfile undo redo | formatselect styleselect | bold italic strikethrough forecolor backcolor permanentpen formatpainter | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | fullscreen code",
+        // plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+        // toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+    });
+</script>
+
+
 </body>
 
 </html>

@@ -14,7 +14,7 @@
 
 
             <div class="form-group col-7">
-                <label>Name</label>
+                <label>Imie</label>
                 <input type="text" class="form-control {{ $errors->has('name' ? 'error' : '') }}" name="name" id="name">
                 @if ($errors->has('name'))
                     <div class="error">
@@ -25,7 +25,7 @@
 
 
             <div class="form-group col-7">
-                <label>Email</label>
+                <label>email kontaktowy</label>
                 <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" id="email">
                 @if ($errors->has('email'))
                     <div class="error">
@@ -36,7 +36,7 @@
 
 
             <div class="form-group col-7">
-                <label>Subject</label>
+                <label>Temat wiadomosci</label>
                 <input type="text" class="form-control {{ $errors->has('subject') ? 'error' : '' }}" name="subject" id="subject">
                 @if ($errors->has('subject'))
                     <div class="error">
@@ -47,8 +47,8 @@
 
 
             <div class="form-group col-8">
-                <label>Message</label>
-                <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="message" rows="4"></textarea>
+                <label>Wiadomosc</label>
+                <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="text_body" rows="4"></textarea>
                 @if ($errors->has('message'))
                     <div class="error">
                         {{ $errors->first('message') }}

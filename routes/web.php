@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FileUpload;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
@@ -133,5 +134,20 @@ Route::post('/contact', [\App\Http\Controllers\ContactUsController::class, 'Cont
 
 
 //AddPostbyUser
-Route::get('/addPost', [PostController::class, 'create'])->middleware('auth');
-Route::post('/addPost', [UserPostController::class, 'store'])->middleware('auth');
+Route::get('/addPost', [\App\Http\Controllers\UserPostController::class, 'create'])->middleware('auth');
+Route::post('/addPost', [\App\Http\Controllers\UserPostController::class, 'store'])->middleware('auth');
+
+
+//UserPage
+
+Route::get('userpage/{user}', function() {
+    return view('userpage',[
+        'user' => auth()->user()
+    ]);
+})->middleware('auth');
+
+
+//FileUpload(User avatar)
+
+Route::get('/userpage', [FileUpload::class, 'createForm']);
+Route::post('/userpage', [FileUpload::class, 'fileUpload'])->name('fileUpload');

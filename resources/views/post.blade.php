@@ -42,7 +42,11 @@
 
             <article class="flex mt-10 bg-gray-100 p-6 border border-gray-200 roundex-xl">
                 <div style="flex-shrink: 0; margin: 10px;">
+                    @if($comment->author->avatar != '')
+                        <img style="border-radius: 50%;" src=<?=$comment->author->avatar?> width="100" height="100">
+                    @else
                     <img style="border-radius: 50%;" src="https://eu.ui-avatars.com/api/?name={{$comment->author->username}}">
+                        @endif
                 </div>
 
                 <div>

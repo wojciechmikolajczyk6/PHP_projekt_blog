@@ -52,7 +52,7 @@ class PostController extends Controller
 
             return view('posts', [
 //                'posts' => DB::table('posts')->orderBy('id')->cursorPaginate(3),
-                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(3),
+                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7),
                 'categories' => Category::all(),
 
             ]);
