@@ -4,22 +4,23 @@
     <form method='post' action='/admin/addPost'>
         @csrf
         <div class="form-group">
-            <label class="form-label">Post title</label>
+            <label class="form-label">Tytuł posta</label>
             <input name="title" type="text" class="form-control" placeholder="Enter title:">
         </div>
         <div class="form-group">
-            <label class="form-label">Post body</label>
+            <label class="form-label">Skrót posta</label>
             <br>
-            <textarea name="body" class="form-control" placeholder="Enter body of the post:" id="post_body" cols="50" rows="10"></textarea>
+            <textarea name="post_fragment" class="form-control" placeholder="Wpisz skrót posta:" id="post_body" cols="50" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Treść posta</label>
+            <br>
+            <textarea name="body" class="form-control" placeholder="Wpisz treść posta:" id="post_body" cols="50" rows="10"></textarea>
         </div>
 
         <br>
-        <div class="form-group">
-            <label class="form-label">Post fragment</label>
-            <br>
-            <textarea name="post_fragment" class="form-control" placeholder="Enter body of the post:" id="post_body" cols="50" rows="10"></textarea>
-        </div>
-        <label class="form-label">Category</label>
+
+        <label class="form-label">Kategoria</label>
         <select name="category_id" id="category_id">
             @php
             $categories = \App\Models\Category::all();

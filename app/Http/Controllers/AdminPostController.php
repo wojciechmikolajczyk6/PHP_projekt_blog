@@ -29,5 +29,6 @@ class AdminPostController extends Controller
         $editPost->delete();
 
         return back();
+        }
     }
-}
+

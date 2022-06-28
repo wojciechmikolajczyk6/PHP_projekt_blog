@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\UserController;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ use App\Http\Controllers\UserPostController;
 */
 
 Route::get('/', [PostController::class, 'index']);
+Route::get('search', [PostController::class, 'search']);
 
 
 
@@ -96,6 +98,9 @@ Route::get('admin', function () {
 //AJAX
 //Route::get('admin', [SearchController::class, 'index']);
 Route::get('/admin/action', [SearchController::class, 'action'])->name('index.action')->middleware('admin');;
+//Route::delete('admin/{deleteUser}', [SearchController::class, 'delete'])->middleware('admin');
+
+
 
 Route::get('/admin/posts', function () {
     return view('admin.showPosts', [
@@ -151,3 +156,18 @@ Route::get('userpage/{user}', function() {
 
 Route::get('/userpage', [FileUpload::class, 'createForm']);
 Route::post('/userpage', [FileUpload::class, 'fileUpload'])->name('fileUpload');
+
+
+// User controlling
+
+Route::get('admin/editUser/{editUser}', function (User $editUser) {
+
+    return view('admin.editUser', [
+        'editUser' => $editUser
+    ]);
+})->middleware('admin');
+
+
+Route::patch('admin/editUser/{editUser}/edit', [UserController::class, 'update'])->middleware('admin');
+
+Route::GET('admin/editUser/{editUser}/delete', [UserController::class, 'delete'])->middleware('admin');

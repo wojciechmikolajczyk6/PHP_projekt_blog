@@ -10,15 +10,15 @@
             <input name="post_id" type="text" class="form-control" placeholder="Enter title:" value="{{$editPost->id}}">
         </div>
         <div class="form-group">
-            <label class="form-label">Post title</label>
+            <label class="form-label">Tytuł</label>
             <input name="title" type="text" class="form-control" placeholder="Enter title:" value=" {{$editPost->title}}">
         </div>
         <div class="form-group">
-            <label class="form-label">Post fragment</label>
+            <label class="form-label">Skrót</label>
             <input name="post_fragment" type="text" class="form-control" placeholder="Enter title:" value=" {{$editPost->title}}">
         </div>
         <div class="form-group">
-            <label class="form-label">Post body</label>
+            <label class="form-label">Treść</label>
             <br>
             <textarea name="body" class="form-control" placeholder="Enter body of the post:" id="" cols="50" rows="10">{{$editPost->body}}</textarea>
         </div>

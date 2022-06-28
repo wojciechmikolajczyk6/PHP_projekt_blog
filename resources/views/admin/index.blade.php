@@ -4,6 +4,9 @@
 
     <div class="container box">
         <h3 align="center">Lista uzytkownikow</h3><br />
+        @if(Session::has('success'))
+            <h2><p class="text-primary text-center text-danger">{{session('success')}}</p></h2>
+        @endif
         <div class="panel panel-default">
             <div class="panel-heading">Wyszukaj uzytkownika</div>
             <div class="panel-body">
@@ -19,6 +22,8 @@
                             <th>Nazwa uzytkownika</th>
                             <th>Imie i nazwisko</th>
                             <th>email</th>
+                            <th>Edytuj</th>
+                            <th>Usun</th>
                         </tr>
                         </thead>
                         <tbody>

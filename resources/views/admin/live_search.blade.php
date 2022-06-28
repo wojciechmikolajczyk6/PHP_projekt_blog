@@ -25,6 +25,7 @@
                         <th>name</th>
                         <th>email</th>
                         <th>id</th>
+                        <th>delete</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -55,11 +55,12 @@
                 </div>
             @endif
             <div class="custom-file">
-                <input type="file" name="file" class="custom-file-input" id="chooseFile">
-                <label class="custom-file-label" for="chooseFile">Wybierz zdjecie</label>
+                <label class="form-label" for="chooseFile">Wybierz zdjecie</label>
+                <input type="file" name="file" class="form-control" id="chooseFile">
+
             </div>
-            <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
-                Upload Files
+            <button type="submit" name="submit" class="btn btn-primary btn-block mt-2">
+                Zmień avatar
             </button>
         </form>
     </div>

@@ -4,15 +4,31 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('register.create');
+        //AJAX
+        $mail_check = $request->input('mail_check');
+        $query = User::all();
+        if(!is_null($mail_check)) {
+
+            $query = User::where('email','like', "$mail_check")->get();
+
+            return response()->json([
+                'data' => $query
+            ]);
+        }
+
+        else {
+            return view('register.create');
+        }
     }
     public function store()
     {
+
         //create user
         request() ->validate([
             '_answer'   => 'required|simple_captcha'
@@ -25,17 +41,16 @@ class RegisterController extends Controller
             'password' => 'required|max:255'
         ]);
 
-//        $user_data['password'] = bcrypt($user_data['password']);
 
+            $user = User::create($user_data);
 
-        $user = User::create($user_data);
+            session()->flash('user_created', 'Twoje konto zostalo zalozone.');
 
-        session()->flash('user_created', 'Twoje konto zostalo zalozone.');
+            auth()->login($user);
 
-        auth()->login($user);
+            return redirect('/');
+        }
 
-        return redirect('/');
-    }
 
 
 

@@ -44,7 +44,10 @@ class SearchController extends Controller
          <td>'.$row->username.'</td>
          <td>'.$row->name.'</td>
          <td>'.$row->email.'</td>
-
+         <td><a href="/admin/editUser/'. $row->id.'">Edytuj</a></td>
+         <td><form method="DELETE" action="/admin/editUser/'.$row->id.'/delete">
+                <button class="text-danger">Usuń</button></form></td>
+        </form>
         </tr>
         ';
                 }

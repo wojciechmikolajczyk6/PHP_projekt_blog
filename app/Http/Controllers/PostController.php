@@ -11,7 +11,9 @@ use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
-
+    /**
+    * @return View|JsonResponse
+    */
 
 
     public function create()
@@ -39,23 +41,34 @@ class PostController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $query = Post::query();
+
+        if(!is_null($search)) {
+            $query = Post::where('title', 'like', "%" . "$search" . "%")->first()->get();
+
+
+
+            return response()->json([
+
+                'data' => $query,
+
+                'categories' => Category::all()
+            ]);
+        } else{
+
 
        $posts = Post::latest();
 
-
-//        if (request('search')) {
-//            $posts->where('title', 'like', '%' . request('search') . '%')->get();
-//
-//        }
-
             return view('posts', [
-//                'posts' => DB::table('posts')->orderBy('id')->cursorPaginate(3),
-                'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->paginate(7),
-                'categories' => Category::all(),
+                //'posts' => Post::paginate(7),
+                'posts' => $posts->paginate(8),
+                'categories' => Category::orderBy('name', 'ASC')->get(),
 
             ]);
+        }
         }
 
 
@@ -66,6 +79,18 @@ class PostController extends Controller
                 'post' => $post
             ]);
     }
+    public function search(Request $request){
+
+
+        $search = $request->input('search');
+        $posts = DB::table('posts')->where('title', 'like', "%"."$search"."%")->get();
+
+        return response()->json($posts);
+
+    }
+
+
+
 
 
 
